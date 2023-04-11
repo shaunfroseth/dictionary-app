@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Dictionary web app</title>
-</head>
-<body>
-
-</body>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Frontend Mentor | Dictionary web app</title>
+  </head>
+  <body id="output-text">
+    <script src="./script.js"></script>
+    <div class="main-container">
+      <div class="utility-bar">
+        <img src="./assets/images/logo.svg" alt="logo" />
+        <div class="page-modifiers">
+          <select
+            onchange="changeFontStyle(this);"
+            name="font"
+            id="font-selector"
+          >
+            <option selected="selected" value="sans-serif">Serif</option>
+            <option value="monospace">Mono</option>
+            <option value="sans">Sans</option>
+          </select>
+          <hr />
+          <div class="theme-selector">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <img
+              style="margin-left: 10px"
+              src="./assets/images/icon-moon.svg"
+              alt="dark-mode"
+              class="moon"
+            />
+          </div>
+        </div>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, odio!
+        Autem, placeat minima. In error dolorum, optio esse dignissimos est
+        expedita, ex omnis asperiores vitae sit quod. Quo, ducimus in.
+      </p>
+    </div>
+    <img src="../preview.jpg" alt="" />
+  </body>
 </html>
