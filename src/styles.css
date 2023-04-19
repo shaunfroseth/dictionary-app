@@ -4,6 +4,11 @@
   margin: 0% 30% 0 30%;
 }
 
+.dark {
+  background-color: #050505;
+  color: white;
+}
+
 .page-modifiers {
   border: 1px solid grey;
   display: flex;
@@ -14,7 +19,6 @@
 .theme-selector {
   display: flex;
   border: 1px solid purple;
-
   width: auto;
   align-items: center;
   justify-content: right;
@@ -68,6 +72,8 @@
   transition: 0.4s;
 }
 
+/* End Slider */
+
 hr {
   height: 90%;
   margin: 0px 10px 0px 10px;
@@ -77,6 +83,7 @@ select {
   appearance: none;
   border: none;
   padding-right: 15px;
+  background-color: transparent;
   background-image: url("./assets/images/icon-arrow-down.svg");
   background-repeat: no-repeat;
   background-position: right;
@@ -93,10 +100,6 @@ select:focus {
 input:checked + .slider {
   background-color: #a346ef;
 }
-
-/* input:focus + .slider {
-  box-shadow: 0 0 1px #a346ef;
-} */
 
 input:checked + .slider:before {
   -webkit-transform: translateX(18px);
@@ -119,6 +122,7 @@ input {
   border: none;
   font-family: inherit;
   font-weight: 600;
+  width: 90%;
 }
 
 input:focus {
@@ -147,4 +151,8 @@ input:focus {
 
 .search-button:hover {
   cursor: pointer;
+}
+
+.part-of-speech {
+  list-style-type: none;
 }
