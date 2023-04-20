@@ -22,17 +22,26 @@ async function displayData() {
   wordHeader.innerHTML = result[0].word;
   resultDiv.appendChild(wordHeader);
 
+  let phonetic = document.createElement("p");
+  phonetic.setAttribute("class", "phonetic");
+  phonetic.innerHTML = result[0].phonetic;
+  resultDiv.appendChild(phonetic);
+
   //Create and append list of meanings
   let meanings = result[0].meanings;
   let meaningList = document.createElement("ul");
+
   meaningList.setAttribute("class", "part-of-speech");
   resultDiv.appendChild(meaningList);
 
   //Append "partOfSpeech" and definitions for each partOfSpeech
   for (let i = 0; i < meanings.length; i++) {
-    meaningList.innerHTML += "<li>" + meanings[i].partOfSpeech + "</li>";
+    meaningList.innerHTML +=
+      "<li class='type-word'><span>" +
+      meanings[i].partOfSpeech +
+      "</span></li>";
     let definitionList = document.createElement("ul");
-    definitionList.setAttribute("id", "definition-list");
+    definitionList.setAttribute("class", "definition-list");
     meaningList.appendChild(definitionList);
     for (let j = 0; j < meanings[i].definitions.length; j++) {
       definitionList.innerHTML +=

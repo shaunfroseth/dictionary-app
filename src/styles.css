@@ -155,4 +155,31 @@ input:focus {
 
 .part-of-speech {
   list-style-type: none;
+  padding-left: 0;
+}
+
+.type-word::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.5em;
+  border-top: 1px solid black;
+  z-index: -1;
+}
+
+.type-word {
+  font-size: 1rem;
+  position: relative;
+  margin-top: 10px;
+}
+
+.type-word span {
+  background-color: white;
+  padding-right: 10px;
+}
+
+.definition-list {
+  margin-top: 10px;
 }
