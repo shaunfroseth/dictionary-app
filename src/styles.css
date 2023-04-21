@@ -1,16 +1,11 @@
 .main-container {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   height: 100%;
-  margin: 0% 30% 0 30%;
-}
-
-.dark {
-  background-color: #050505;
-  color: white;
+  margin: 5% 30% 0 30%;
 }
 
 .page-modifiers {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +13,7 @@
 
 .theme-selector {
   display: flex;
-  border: 1px solid purple;
+  /* border: 1px solid purple; */
   width: auto;
   align-items: center;
   justify-content: right;
@@ -28,7 +23,7 @@
   display: flex;
   width: auto;
   height: auto;
-  border: 2px solid green;
+  /* border: 2px solid green; */
   justify-content: space-between;
 }
 
@@ -75,8 +70,9 @@
 /* End Slider */
 
 hr {
-  height: 90%;
+  height: 80%;
   margin: 0px 10px 0px 10px;
+  border: 1px solid #757575;
 }
 
 select {
@@ -133,7 +129,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
   background-color: #f4f4f4;
-  margin: 20px 0px 20px 0px;
+  margin: 60px 0px 20px 0px;
   padding: 14px 18px 14px 14px;
   border-radius: 10px;
   align-items: center;
@@ -165,7 +161,7 @@ input:focus {
   left: 0;
   right: 0;
   height: 0.5em;
-  border-top: 1px solid black;
+  border-top: 1px solid #f4f4f4;
   z-index: -1;
 }
 
@@ -178,8 +174,67 @@ input:focus {
 .type-word span {
   background-color: white;
   padding-right: 10px;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .definition-list {
   margin-top: 10px;
+  list-style-type: disc;
+}
+
+li {
+  color: #a346ef;
+  margin-bottom: 10px;
+}
+
+li span {
+  color: black;
+}
+
+/* Dark Mode */
+
+.dark {
+  background-color: #050505;
+  color: white;
+}
+
+.dark li span {
+  color: white;
+  background-color: #050505;
+  border-color: #757575;
+}
+
+.dark .type-word::after {
+  border-top: 1px solid #757575;
+}
+
+.dark .search-bar {
+  background-color: #1f1f1f;
+}
+
+.dark input {
+  color: white;
+}
+
+.dark select {
+  color: white;
+  background-color: #050505;
+  outline: 0;
+  border: 0;
+}
+
+/* End Dark Mode */
+
+.phonetic {
+  color: #a346ef;
+  font-size: 1.2rem;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  margin-bottom: 5px;
+  font-size: 3rem;
 }

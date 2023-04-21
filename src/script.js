@@ -45,7 +45,7 @@ async function displayData() {
     meaningList.appendChild(definitionList);
     for (let j = 0; j < meanings[i].definitions.length; j++) {
       definitionList.innerHTML +=
-        "<li>" + meanings[i].definitions[j].definition + "</li>";
+        "<li><span>" + meanings[i].definitions[j].definition + "</span></li>";
     }
   }
 
