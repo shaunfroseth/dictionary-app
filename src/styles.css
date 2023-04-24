@@ -230,11 +230,32 @@ li span {
 .phonetic {
   color: #a346ef;
   font-size: 1.2rem;
-  margin-top: 0px;
-  margin-bottom: 30px;
+  margin: 0px 0px 30px 0px;
 }
 
 h1 {
   margin-bottom: 5px;
   font-size: 3rem;
+}
+
+.play-btn {
+  background-image: url(./assets/images/icon-play.svg);
+  border: 0;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
+
+.play-btn:hover {
+  cursor: pointer;
+}
+
+.word-phonetic {
+  /* display: flex; */
+}
+
+.primary-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

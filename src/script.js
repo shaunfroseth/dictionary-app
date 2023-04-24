@@ -1,6 +1,7 @@
 const BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 const searchButton = document.getElementById("search-btn");
+const playButton = document.getElementById("play-button");
 const toggleSlider = document.getElementById("light-dark-toggle");
 
 async function loadData() {
@@ -17,15 +18,30 @@ async function displayData() {
   let resultDiv = document.getElementById("results");
   resultDiv.innerHTML = ""; //Clear innerHTML between searches
 
+  //primary info
+  let primaryInfo = document.createElement("div");
+  primaryInfo.setAttribute("class", "primary-info");
+  resultDiv.appendChild(primaryInfo);
+
+  //word+phonetic
+  let wordPhoneticDiv = document.createElement("div");
+  wordPhoneticDiv.setAttribute("class", "word-phonetic");
+  primaryInfo.appendChild(wordPhoneticDiv);
+
   //Set h1 for retrieved word
   let wordHeader = document.createElement("h1");
   wordHeader.innerHTML = result[0].word;
-  resultDiv.appendChild(wordHeader);
+  wordPhoneticDiv.appendChild(wordHeader);
 
   let phonetic = document.createElement("p");
   phonetic.setAttribute("class", "phonetic");
   phonetic.innerHTML = result[0].phonetic;
-  resultDiv.appendChild(phonetic);
+  wordPhoneticDiv.appendChild(phonetic);
+
+  let playButton = document.createElement("button");
+  playButton.setAttribute("class", "play-btn");
+  playButton.setAttribute("id", "play-button");
+  primaryInfo.appendChild(playButton);
 
   //Create and append list of meanings
   let meanings = result[0].meanings;
@@ -49,15 +65,18 @@ async function displayData() {
     }
   }
 
-  console.log(result);
+  playButton.addEventListener("click", () => {
+    let length = result[0].phonetics.length;
+    let audio = new Audio(result[0].phonetics[length - 1].audio);
+    audio.play();
+    console.log(result[0].phonetics[length - 1].audio);
+  });
 }
 
-function toggleTheme() {
+//Toggle dark mode
+toggleSlider.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  console.log("click");
-}
-
-toggleSlider.addEventListener("click", toggleTheme);
+});
 
 // Checks for click or enter-press
 searchButton.addEventListener("click", displayData);
