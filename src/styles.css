@@ -259,3 +259,8 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
+
+p {
+  color: #757575;
+  margin-top: 30px;
+}

@@ -13,7 +13,10 @@ async function loadData() {
 }
 
 async function displayData() {
-  let result = await loadData();
+  const result = await loadData();
+  const audioFile = result[0].phonetics.find(
+    (x) => x.audio && x.audio.includes("us.mp3")
+  );
 
   let resultDiv = document.getElementById("results");
   resultDiv.innerHTML = ""; //Clear innerHTML between searches
@@ -35,13 +38,20 @@ async function displayData() {
 
   let phonetic = document.createElement("p");
   phonetic.setAttribute("class", "phonetic");
-  phonetic.innerHTML = result[0].phonetic;
+  phonetic.innerHTML = result[0].phonetics.find((x) => x.text).text;
   wordPhoneticDiv.appendChild(phonetic);
 
-  let playButton = document.createElement("button");
-  playButton.setAttribute("class", "play-btn");
-  playButton.setAttribute("id", "play-button");
-  primaryInfo.appendChild(playButton);
+  //audio button
+  if (audioFile) {
+    let playButton = document.createElement("button");
+    playButton.setAttribute("class", "play-btn");
+    playButton.setAttribute("id", "play-button");
+    primaryInfo.appendChild(playButton);
+    playButton.addEventListener("click", () => {
+      const audio = new Audio(audioFile.audio);
+      audio.play();
+    });
+  }
 
   //Create and append list of meanings
   let meanings = result[0].meanings;
@@ -55,22 +65,17 @@ async function displayData() {
     meaningList.innerHTML +=
       "<li class='type-word'><span>" +
       meanings[i].partOfSpeech +
-      "</span></li>";
+      "</span></li>" +
+      "<p>Meaning</p>";
     let definitionList = document.createElement("ul");
     definitionList.setAttribute("class", "definition-list");
     meaningList.appendChild(definitionList);
     for (let j = 0; j < meanings[i].definitions.length; j++) {
+      if (j > 5) break;
       definitionList.innerHTML +=
         "<li><span>" + meanings[i].definitions[j].definition + "</span></li>";
     }
   }
-
-  playButton.addEventListener("click", () => {
-    let length = result[0].phonetics.length;
-    let audio = new Audio(result[0].phonetics[length - 1].audio);
-    audio.play();
-    console.log(result[0].phonetics[length - 1].audio);
-  });
 }
 
 //Toggle dark mode
@@ -86,8 +91,8 @@ document.getElementById("input-field").addEventListener("keyup", (event) => {
     document.getElementById("search-btn").click();
   }
 });
-//
 
+//switches font via select menu
 let changeFontStyle = function (font) {
   document.getElementById("output-text").style.fontFamily = font.value;
 };
