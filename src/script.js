@@ -13,68 +13,80 @@ async function loadData() {
 }
 
 async function displayData() {
-  const result = await loadData();
-  const audioFile = result[0].phonetics.find(
-    (x) => x.audio && x.audio.includes("us.mp3")
-  );
-
   let resultDiv = document.getElementById("results");
   resultDiv.innerHTML = ""; //Clear innerHTML between searches
 
-  //primary info
-  let primaryInfo = document.createElement("div");
-  primaryInfo.setAttribute("class", "primary-info");
-  resultDiv.appendChild(primaryInfo);
+  try {
+    const result = await loadData();
+    const audioFile = result[0].phonetics.find(
+      (x) => x.audio && x.audio.includes("us.mp3")
+    );
 
-  //word+phonetic
-  let wordPhoneticDiv = document.createElement("div");
-  wordPhoneticDiv.setAttribute("class", "word-phonetic");
-  primaryInfo.appendChild(wordPhoneticDiv);
+    //primary info
+    let primaryInfo = document.createElement("div");
+    primaryInfo.setAttribute("class", "primary-info");
+    resultDiv.appendChild(primaryInfo);
 
-  //Set h1 for retrieved word
-  let wordHeader = document.createElement("h1");
-  wordHeader.innerHTML = result[0].word;
-  wordPhoneticDiv.appendChild(wordHeader);
+    //word+phonetic
+    let wordPhoneticDiv = document.createElement("div");
+    wordPhoneticDiv.setAttribute("class", "word-phonetic");
+    primaryInfo.appendChild(wordPhoneticDiv);
 
-  let phonetic = document.createElement("p");
-  phonetic.setAttribute("class", "phonetic");
-  phonetic.innerHTML = result[0].phonetics.find((x) => x.text).text;
-  wordPhoneticDiv.appendChild(phonetic);
+    //Set h1 for retrieved word
+    let wordHeader = document.createElement("h1");
+    wordHeader.innerHTML = result[0].word;
+    wordPhoneticDiv.appendChild(wordHeader);
 
-  //audio button
-  if (audioFile) {
-    let playButton = document.createElement("button");
-    playButton.setAttribute("class", "play-btn");
-    playButton.setAttribute("id", "play-button");
-    primaryInfo.appendChild(playButton);
-    playButton.addEventListener("click", () => {
-      const audio = new Audio(audioFile.audio);
-      audio.play();
-    });
-  }
+    let phonetic = document.createElement("p");
+    phonetic.setAttribute("class", "phonetic");
+    phonetic.innerHTML = result[0].phonetics.find((x) => x.text).text;
+    wordPhoneticDiv.appendChild(phonetic);
 
-  //Create and append list of meanings
-  let meanings = result[0].meanings;
-  let meaningList = document.createElement("ul");
-
-  meaningList.setAttribute("class", "part-of-speech");
-  resultDiv.appendChild(meaningList);
-
-  //Append "partOfSpeech" and definitions for each partOfSpeech
-  for (let i = 0; i < meanings.length; i++) {
-    meaningList.innerHTML +=
-      "<li class='type-word'><span>" +
-      meanings[i].partOfSpeech +
-      "</span></li>" +
-      "<p>Meaning</p>";
-    let definitionList = document.createElement("ul");
-    definitionList.setAttribute("class", "definition-list");
-    meaningList.appendChild(definitionList);
-    for (let j = 0; j < meanings[i].definitions.length; j++) {
-      if (j > 5) break;
-      definitionList.innerHTML +=
-        "<li><span>" + meanings[i].definitions[j].definition + "</span></li>";
+    //audio button
+    if (audioFile) {
+      let playButton = document.createElement("button");
+      playButton.setAttribute("class", "play-btn");
+      playButton.setAttribute("id", "play-button");
+      primaryInfo.appendChild(playButton);
+      playButton.addEventListener("click", () => {
+        const audio = new Audio(audioFile.audio);
+        audio.play();
+      });
     }
+
+    //Create and append list of meanings
+    let meanings = result[0].meanings;
+    let meaningList = document.createElement("ul");
+
+    meaningList.setAttribute("class", "part-of-speech");
+    resultDiv.appendChild(meaningList);
+
+    //Append "partOfSpeech" and definitions for each partOfSpeech
+    for (let i = 0; i < meanings.length; i++) {
+      meaningList.innerHTML +=
+        "<li class='type-word'><span>" +
+        meanings[i].partOfSpeech +
+        "</span></li>" +
+        "<p>Meaning</p>";
+      let definitionList = document.createElement("ul");
+      definitionList.setAttribute("class", "definition-list");
+      meaningList.appendChild(definitionList);
+      for (let j = 0; j < meanings[i].definitions.length; j++) {
+        if (j > 5) break;
+        definitionList.innerHTML +=
+          "<li><span>" + meanings[i].definitions[j].definition + "</span></li>";
+      }
+    }
+
+    let divider = document.createElement("hr");
+    divider.setAttribute("class", "divider");
+    resultDiv.appendChild(divider);
+    let source = document.createElement("p");
+    source.setAttribute("class", "source-url");
+    source.innerHTML = `Source: <a href='https://en.wiktionary.org/wiki/${result[0].word}'target="_blank rel="noopener noreferrer"">https://en.wiktionary.org/wiki/${result[0].word}</a>`;
+    resultDiv.appendChild(source);
+  } catch (error) {
+    alert("No results found, please try again.");
   }
 }
 
