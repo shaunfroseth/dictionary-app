@@ -181,6 +181,7 @@ input:focus {
 
 .definition-list {
   margin-top: 10px;
+  margin-bottom: 30px;
   list-style-type: disc;
 }
 
